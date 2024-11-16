@@ -1,0 +1,76 @@
+nav {
+  height: 40px;
+  width: 100vw;
+  top: 100px;
+  border-bottom: 2px solid #050038;
+  background-color: #484282;
+  flex-direction: column;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  padding-left: 30px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-inline-start: 0px;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.nav-list {
+  display: flex;
+  align-items: center;
+}
+.nav-list li {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+.nav-list li:last-of-type {
+  padding-right: 0;
+}
+.nav-list-link {
+  position: relative;
+  transition: all 0.25s ease;
+}
+.nav-list-link:hover {
+  color: coral;
+}
+.nav-list-link::after {
+  content: "";
+  background: coral;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  transform: scaleX(0);
+  transition: all 0.25s ease;
+}
+.nav-list-link:hover::after {
+  transform: scaleX(1);
+}
+.nav-list li:last-of-type a {
+  display: flex;
+  align-items: center;
+  background-color: #484282;
+  color: coral;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+.nav-list li:last-of-type a:hover {
+  background-color: coral;
+  color: #484282;
+}
+.nav-list li:last-of-type a svg {
+  width: 1em;
+}
+.support-heart {
+  margin-right: 5px;
+}

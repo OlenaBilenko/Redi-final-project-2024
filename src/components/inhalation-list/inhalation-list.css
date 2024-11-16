@@ -1,0 +1,63 @@
+.hydration-and-planing {
+  width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0 24px 24px 24px;
+}
+.hydration,
+.daily-planing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: gray solid 1px;
+  padding: 0 24px 24px 24px;
+}
+.hydration {
+  width: 45%;
+  margin-right: 24px;
+  justify-content: space-between;
+  align-items: center;
+}
+.daily-planing {
+  width: 45%;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+table thead tr {
+  background-color: #484282;
+  color: #ffffff;
+  text-align: left;
+}
+td,
+th {
+  border-bottom: 1px solid #484282;
+  text-align: center;
+  padding: 8px;
+}
+tbody tr:hover {
+  background-color: rgb(252, 205, 187);
+  cursor: pointer;
+}
+.trashTreatment svg {
+  width: 18px;
+  padding: 0;
+  cursor: pointer;
+  display: none;
+}
+.isDone .trashTreatment svg {
+  display: block;
+}
+.isDone {
+  color: rgba(36, 33, 33, 0.613);
+  text-decoration: line-through;
+}
+.isDone td {
+  color: rgba(36, 33, 33, 0.613);
+  background-color: #dddddd;
+}
