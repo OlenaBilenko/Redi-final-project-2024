@@ -8,27 +8,44 @@ import { BodyTemp } from "./components/body-temp/body-temp";
 import { InhalationList } from "./components/inhalation-list/inhalation-list";
 import { BodyTempList } from "./components/body-temp-list/body-temp-list";
 import { useState } from "react";
+import { Temperature } from "@/models";
 
 function App() {
   const [tempModal, setTempModal] = useState(false);
-  const toggleTempModal = () => {
-    setTempModal(!tempModal);
+  const [data, setData] = useState<Temperature>();
+
+  // const toggleTempModal = (id?: number, data?: Temperature) => {
+  //   setTempModal(!tempModal);
+  // };
+  const openTempModal = (id?: number, data?: Temperature) => {
+    setTempModal(true);
+    setData(data);
+  };
+  const closeTempModal = () => {
+    setTempModal(false);
   };
   return (
     <>
       <NavBar />
       <div className="flex gap-4 flex-col p-4">
         <h1 className="text-3xl font-bold underline">My healthy Life</h1>
-        <Button onClick={toggleTempModal}>Log temperature</Button>
+        <Button onClick={() => openTempModal()}>Log temperature</Button>
         {/* <Chart /> */}
         <div className="flex flex-row justify-evenly gap-3 bg-slate-100">
           <FirstLineChart />
           <FirstLineChart />
         </div>
-        <BodyTemp toggleTempModal={toggleTempModal} tempModal={tempModal} />
+        <BodyTemp
+          data={data}
+          closeTempModal={closeTempModal}
+          tempModal={tempModal}
+        />
         <div className="hydration-and-planing">
           <InhalationList />
-          <BodyTempList />
+          <BodyTempList
+            openTempModal={openTempModal}
+            closeTempModal={closeTempModal}
+          />
         </div>
       </div>
     </>

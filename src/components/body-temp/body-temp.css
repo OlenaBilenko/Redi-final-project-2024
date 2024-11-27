@@ -34,6 +34,14 @@
   width: 100%;
   height: 100%;
 }
+.dialog-box-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #050038;
+  color: white;
+}
 input {
   width: 80%;
   margin: 1em;
