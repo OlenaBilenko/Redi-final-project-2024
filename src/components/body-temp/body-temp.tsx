@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import "./body-temp.css";
 import { Temperature, TemperatureSchema } from "@/models";
 import { z, ZodError } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {
   data?: Temperature;
-  tempModal: boolean;
   closeTempModal: () => void;
 };
 
@@ -21,19 +21,20 @@ const postTemperature = async (temperature: Temperature) => {
 };
 
 export const BodyTemp = (props: Props) => {
-  const submitTemp = async () => {
+  const submitTemp = async (temp: Temperature) => {
     try {
-      const newTemperatureRecord: Temperature = {
-        id: 0,
-        temperature: 36.5,
-        timestamp: new Date().toISOString(),
-        // saturation: 98,
-        // symptoms: "none",
-        // respiratoryRate: 65,
-        // comment: "none",
-      };
+      console.log("Data", temp);
+      // const newTemperatureRecord: Temperature = {
+      //   id: 0,
+      //   temperature: 36.5,
+      //   timestamp: new Date().toISOString(),
+      //   // saturation: 98,
+      //   // symptoms: "none",
+      //   // respiratoryRate: 65,
+      //   // comment: "none",
+      // };
 
-      await postTemperature(newTemperatureRecord);
+      await postTemperature(temp);
       props.closeTempModal();
       window.location.reload();
     } catch (error) {
@@ -43,10 +44,22 @@ export const BodyTemp = (props: Props) => {
     }
   };
 
-  const form = useForm();
+  const defaultValues: Partial<Temperature> = props.data
+    ? props.data
+    : {
+        timestamp: new Date().toISOString,
+      };
+
+  console.log("defaults", defaultValues, "data", props.data);
+  const form = useForm<Temperature>({
+    resolver: zodResolver(TemperatureSchema),
+    defaultValues: defaultValues,
+  });
+  const errors = form.formState.errors;
+  console.log("errors", errors);
 
   return (
-    <dialog id="bodyTempModal" className="dialog-modal" open={props.tempModal}>
+    <dialog id="bodyTempModal" className="dialog-modal" open={true}>
       <div className="dialog-box-modal">
         <div className="dialog-box-title">
           <h1>Body Temperature</h1>
@@ -56,34 +69,65 @@ export const BodyTemp = (props: Props) => {
             id="dialog-box-modal-content-tempetature"
             className="dialog-box-modal-content"
           >
-            <input id="tempTime" type="datetime-local" required />
+            <input
+              id="tempTime"
+              type="datetime-local"
+              required
+              {...form.register("timestamp", { valueAsDate: true })}
+            />
+            {errors.timestamp && (
+              <p className="dialog-box-title">{errors.timestamp?.message}</p>
+            )}
             <input
               id="tempValue"
-              value="36,6"
+              type="number"
               inputMode="numeric"
               placeholder="Temperature, C"
               required
+              {...form.register("temperature")}
             />
+            {errors.temperature && (
+              <p className="dialog-box-title">{errors.temperature?.message}</p>
+            )}
+
             <input
               id="tempSaturation"
               inputMode="numeric"
               placeholder="Saturation, %"
+              {...form.register("saturation")}
             />
+            {errors.saturation && (
+              <p className="dialog-box-title">{errors.saturation?.message}</p>
+            )}
             <input
               id="tempSymptoms"
               list="browser"
-              name="symptoms"
               placeholder="Symptoms"
+              {...form.register("symptoms")}
             />
+            {errors.symptoms && (
+              <p className="dialog-box-title">{errors.symptoms?.message}</p>
+            )}
             <input
               id="respFrequency"
               type="number"
               inputMode="numeric"
               placeholder="Respiratory frequency"
+              {...form.register("respiratoryRate")}
             />
+            {errors.respiratoryRate && (
+              <p className="dialog-box-title">
+                {errors.respiratoryRate?.message}
+              </p>
+            )}
             <div className="tempComment">
               <label style={{ fontSize: "small" }}>Comment</label>
-              <input id="tempComment" type="text" placeholder="Text" />
+              <input
+                id="tempComment"
+                type="text"
+                placeholder="Text"
+                {...form.register("comment")}
+              />
             </div>
           </div>
         </form>
@@ -101,7 +145,7 @@ export const BodyTemp = (props: Props) => {
             id="submitTempButton"
             className="submitButton"
             type="submit"
-            onClick={submitTemp}
+            onClick={form.handleSubmit(submitTemp)}
           >
             Ok
           </button>

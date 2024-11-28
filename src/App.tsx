@@ -35,11 +35,7 @@ function App() {
           <FirstLineChart />
           <FirstLineChart />
         </div>
-        <BodyTemp
-          data={data}
-          closeTempModal={closeTempModal}
-          tempModal={tempModal}
-        />
+        {tempModal && <BodyTemp data={data} closeTempModal={closeTempModal} />}
         <div className="hydration-and-planing">
           <InhalationList />
           <BodyTempList
