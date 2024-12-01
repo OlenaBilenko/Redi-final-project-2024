@@ -33,7 +33,6 @@ export function FirstLineChart() {
       return { month: key, value };
     });
   const minValue = 30;
-  console.log({ chartData });
   return (
     <Card>
       <CardHeader>

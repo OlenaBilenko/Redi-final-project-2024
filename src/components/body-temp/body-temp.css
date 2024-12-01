@@ -2,7 +2,7 @@
   background-color: hsla(240, 1%, 25%, 0.95);
 }
 .dialog-modal {
-  width: 300px;
+  width: 360px;
   z-index: 3;
   background: white;
   color: black;
@@ -43,9 +43,8 @@
   color: white;
 }
 input {
-  width: 80%;
-  margin: 1em;
-  padding: 0.5em;
+  width: 100%;
+  padding: 8px;
   border-radius: 1px;
   border: solid 1px #050038;
 }
@@ -60,7 +59,6 @@ input:focus {
 }
 
 .tempComment {
-  width: 80%;
   padding: 0.5em;
   border-radius: 1px;
   background-color: lightgrey;
@@ -94,4 +92,9 @@ input:focus {
   cursor: pointer;
   border: solid 1px #484282;
   border-radius: 4px;
+}
+
+.form-error {
+  padding: 0px 16px;
+  color: pink;
 }

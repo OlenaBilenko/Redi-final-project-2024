@@ -9,6 +9,7 @@ import { BodyTempPage } from "./routes/body-temp/body-temp-page.tsx";
 import { ViewTemperature } from "./routes/temperature/view-temperature.tsx";
 import { InalationPlanningRoute } from "./routes/inhalation-planning/inhalation-planning.tsx";
 import { BodyWeightRoute } from "./routes/body-weight/body-weight-page.tsx";
+import "react-datepicker/dist/react-datepicker.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

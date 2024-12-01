@@ -16,7 +16,6 @@ export const NavBar = () => {
     : "nav-list hide-on-narrow-screen";
 
   const location = useLocation();
-  console.log(location.pathname);
 
   return (
     <nav id="navMenu" className="nav">

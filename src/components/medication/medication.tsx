@@ -29,7 +29,7 @@ export const Medication = (props: Props) => {
         <form onSubmit={form.handleSubmit(submitMedication)}>
           <div
             id="dialog-box-modal-content-medication"
-            className="dialog-box-modal-content"
+            className="dialog-box-modal-content gap-4"
           >
             <input
               id="nameMedicationModal"

@@ -5,7 +5,6 @@ import { useParams } from "react-router";
 const fetchTemperature = async (id: number) => {
   const result = await fetch(`http://localhost:3000/temperatures/${id}`);
   const data = await result.json();
-  console.log({ data });
   return data as Temperature;
 };
 

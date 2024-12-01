@@ -26,10 +26,7 @@ export const BodyWeigthHeight = (props: Props) => {
           <h1>Body Weigth / Height</h1>
         </div>
         <form onSubmit={form.handleSubmit(submitWeigthHeight)}>
-          <div
-            id="dialog-box-modal-content-weight-height"
-            className="dialog-box-modal-content"
-          >
+          <div className="flex flex-col gap-4 p-4">
             <input
               id="tempTime"
               type="datetime-local"

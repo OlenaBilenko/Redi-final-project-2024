@@ -1,9 +1,10 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import "./body-temp.css";
 import { Temperature, TemperatureSchema } from "@/models";
-import { z, ZodError } from "zod";
+import { ZodError } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
+import DatePicker from "react-datepicker";
 
 type Props = {
   data?: Temperature;
@@ -21,21 +22,25 @@ const postTemperature = async (temperature: Temperature) => {
   return response.json();
 };
 
+const patchTemperature = async (temperature: Temperature, id: number) => {
+  const response = await fetch(`http://localhost:3000/temperatures/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ temperature }),
+  });
+  return response.json();
+};
+
 export const BodyTemp = (props: Props) => {
   const submitTemp = async (temp: Temperature) => {
     try {
-      console.log("Data", temp);
-      // const newTemperatureRecord: Temperature = {
-      //   id: 0,
-      //   temperature: 36.5,
-      //   timestamp: new Date().toISOString(),
-      //   // saturation: 98,
-      //   // symptoms: "none",
-      //   // respiratoryFrequency: 65,
-      //   // comment: "none",
-      // };
-
-      await postTemperature(temp);
+      if (props.data) {
+        await patchTemperature(temp, props.data.id);
+      } else {
+        await postTemperature(temp);
+      }
       props.closeTempModal();
       window.location.reload();
     } catch (error) {
@@ -46,18 +51,16 @@ export const BodyTemp = (props: Props) => {
   };
 
   const defaultValues: Partial<Temperature> = props.data
-    ? props.data
+    ? { ...props.data, timestamp: new Date(props.data.timestamp) }
     : {
-        timestamp: new Date().toISOString,
+        timestamp: new Date(),
       };
 
-  console.log("defaults", defaultValues, "data", props.data);
   const form = useForm<Temperature>({
     resolver: zodResolver(TemperatureSchema),
     defaultValues: defaultValues,
   });
   const errors = form.formState.errors;
-  console.log("errors", errors);
 
   const dialog = useRef<HTMLDialogElement>();
   useLayoutEffect(() => {
@@ -75,21 +78,29 @@ export const BodyTemp = (props: Props) => {
           </h1>
         </div>
         <form onSubmit={form.handleSubmit(submitTemp)}>
-          <div
-            id="dialog-box-modal-content-tempetature"
-            className="dialog-box-modal-content"
-          >
-            <input
-              id="tempTime"
-              type="datetime-local"
-              required
-              {...form.register("timestamp", { valueAsDate: true })}
+          <div className="flex w-full flex-col">
+            <div className="text-white pt-4">Date and time</div>
+            <Controller
+              control={form.control}
+              name="timestamp"
+              render={({ field }) => {
+                console.log("value", field.value);
+                return (
+                  <DatePicker
+                    showTimeSelect
+                    dateFormat="dd.MM.YYYY HH:mm"
+                    placeholderText="Select date"
+                    onChange={(date) => field.onChange(date)}
+                    selected={new Date(field.value)}
+                  />
+                );
+              }}
             />
             {errors.timestamp && (
-              <p className="dialog-box-title">{errors.timestamp?.message}</p>
+              <p className="form-error">{errors.timestamp?.message}</p>
             )}
+            <div className="text-white pt-4">Temperature C</div>
             <input
-              id="tempValue"
               type="number"
               inputMode="numeric"
               placeholder="Temperature, C"
@@ -97,9 +108,9 @@ export const BodyTemp = (props: Props) => {
               {...form.register("temperature")}
             />
             {errors.temperature && (
-              <p className="dialog-box-title">{errors.temperature?.message}</p>
+              <p className="form-error pt-4">{errors.temperature?.message}</p>
             )}
-
+            <div className="text-white pt-4">Saturation</div>
             <input
               id="tempSaturation"
               inputMode="numeric"
@@ -107,8 +118,9 @@ export const BodyTemp = (props: Props) => {
               {...form.register("saturation")}
             />
             {errors.saturation && (
-              <p className="dialog-box-title">{errors.saturation?.message}</p>
+              <p className="form-error">{errors.saturation?.message}</p>
             )}
+            <div className="text-white  pt-4">Symptoms</div>
             <input
               id="tempSymptoms"
               list="browser"
@@ -116,8 +128,9 @@ export const BodyTemp = (props: Props) => {
               {...form.register("symptoms")}
             />
             {errors.symptoms && (
-              <p className="dialog-box-title">{errors.symptoms?.message}</p>
+              <p className="form-error">{errors.symptoms?.message}</p>
             )}
+            <div className="text-white pt-4">Respiratory requency</div>
             <input
               id="respFrequency"
               type="number"
@@ -126,11 +139,12 @@ export const BodyTemp = (props: Props) => {
               {...form.register("respiratoryFrequency")}
             />
             {errors.respiratoryFrequency && (
-              <p className="dialog-box-title">
+              <p className="form-error">
                 {errors.respiratoryFrequency?.message}
               </p>
             )}
-            <div className="tempComment">
+
+            <div className="tempComment mt-4">
               <label style={{ fontSize: "small" }}>Comment</label>
               <input
                 id="tempComment"
