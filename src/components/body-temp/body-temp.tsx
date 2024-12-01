@@ -3,6 +3,7 @@ import "./body-temp.css";
 import { Temperature, TemperatureSchema } from "@/models";
 import { z, ZodError } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLayoutEffect, useRef } from "react";
 
 type Props = {
   data?: Temperature;
@@ -58,8 +59,13 @@ export const BodyTemp = (props: Props) => {
   const errors = form.formState.errors;
   console.log("errors", errors);
 
+  const dialog = useRef<HTMLDialogElement>();
+  useLayoutEffect(() => {
+    dialog.current.showModal();
+  }, [dialog]);
+
   return (
-    <dialog id="bodyTempModal" className="dialog-modal" open={true}>
+    <dialog id="bodyTempModal" className="dialog-modal" ref={dialog}>
       <div className="dialog-box-modal">
         <div className="dialog-box-title">
           <h1>Body Temperature</h1>

@@ -2,11 +2,10 @@ import "./App.css";
 import { Button } from "@/components/ui/button";
 import { Bar, BarChart } from "recharts";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { FirstLineChart } from "./components/line-chart";
-import { NavBar } from "./components/navbar/navbar";
-import { BodyTemp } from "./components/body-temp/body-temp";
-import { InhalationList } from "./components/inhalation-list/inhalation-list";
-import { BodyTempList } from "./components/body-temp-list/body-temp-list";
+import { FirstLineChart } from "../../components/line-chart";
+import { BodyTemp } from "../../components/body-temp/body-temp";
+import { InhalationList } from "../../components/inhalation-list/inhalation-list";
+import { BodyTempList } from "../../components/body-temp-list/body-temp-list";
 import { useState } from "react";
 import { Temperature } from "@/models";
 
@@ -51,9 +50,7 @@ function App() {
   // };
   return (
     <>
-      <NavBar />
       <div className="flex gap-4 flex-col p-4">
-        <h1 className="text-3xl font-bold underline">My healthy Life</h1>
         {/* <Button onClick={() => openLogModal()}>Create Log</Button> */}
         <Button onClick={() => openTempModal()}>Log temperature</Button>
         <Button onClick={() => openWeigthHeigthModal()}>

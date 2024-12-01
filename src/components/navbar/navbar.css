@@ -74,3 +74,10 @@ a {
 .support-heart {
   margin-right: 5px;
 }
+.nav-toggle {
+  color: #fff;
+  background-color: #484282;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}

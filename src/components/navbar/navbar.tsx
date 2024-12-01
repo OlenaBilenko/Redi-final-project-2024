@@ -1,9 +1,28 @@
+import { Link } from "react-router";
 import "./navbar.css";
+import { useState } from "react";
+
+// const toggleButton = document.getElementById("navToggle");
+// const navListMenu = document.getElementById("navMenuList");
+
+// toggleButton.addEventListener("click", () => {
+//   navListMenu.classList.toggle("hide-on-narrow-screen");
+// });
 
 export const NavBar = () => {
+  const [epandedToggle, setExpandedToggle] = useState(false);
+  const navMenuListClass = epandedToggle
+    ? "nav-list"
+    : "nav-list hide-on-narrow-screen";
   return (
     <nav id="navMenu" className="nav">
-      <button id="navToggle" className="nav-toggle">
+      <button
+        id="navToggle"
+        className="nav-toggle"
+        onClick={() => {
+          setExpandedToggle(!epandedToggle);
+        }}
+      >
         <svg
           aria-hidden="true"
           focusable="false"
@@ -21,16 +40,21 @@ export const NavBar = () => {
           ></path>
         </svg>
       </button>
-      <ul id="navMenuList" className="nav-list hide-on-narrow-screen">
+      <ul id="navMenuList" className={navMenuListClass}>
         <li>
-          <a className="nav-list-link" href="#">
-            Body temperature
-          </a>
+          <Link className="nav-list-link" to="/">
+            Home
+          </Link>
         </li>
         <li>
-          <a className="nav-list-link" href="#">
+          <Link className="nav-list-link" to="/body-temp">
+            Body temperature
+          </Link>
+        </li>
+        <li>
+          <Link className="nav-list-link" to="/body-weight">
             Body weight
-          </a>
+          </Link>
         </li>
         <li>
           <a className="nav-list-link" href="#">
@@ -53,9 +77,9 @@ export const NavBar = () => {
           </a>
         </li>
         <li>
-          <a className="nav-list-link" href="#">
+          <Link className="nav-list-link" to="/about">
             Contact
-          </a>
+          </Link>
         </li>
         <li>
           <a href="#">
