@@ -1,11 +1,31 @@
-export const Medication = () => {
+import { useLayoutEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+
+type Props = {
+  closeMedicationModal: () => void;
+};
+
+export const Medication = (props: Props) => {
+  const submitMedication = async (data: any) => {
+    console.log("Data", data);
+  };
+
+  const dialog = useRef<HTMLDialogElement>();
+  useLayoutEffect(() => {
+    if (dialog.current) {
+      dialog.current.showModal();
+    }
+  }, [dialog]);
+
+  const form = useForm({});
+
   return (
-    <dialog id="medicationModal" className="dialog-modal">
+    <dialog id="medicationModal" className="dialog-modal" ref={dialog}>
       <div className="dialog-box-modal">
         <div className="dialog-box-title">
           <h1>Add Medication</h1>
         </div>
-        <form>
+        <form onSubmit={form.handleSubmit(submitMedication)}>
           <div
             id="dialog-box-modal-content-medication"
             className="dialog-box-modal-content"
@@ -42,6 +62,7 @@ export const Medication = () => {
             id="cancelMedicationButton"
             className="cancelButton"
             type="submit"
+            onClick={props.closeMedicationModal}
           >
             Cancel
           </button>
@@ -49,6 +70,7 @@ export const Medication = () => {
             id="submitMedicationButton"
             className="submitButton"
             type="submit"
+            onClick={form.handleSubmit(submitMedication)}
           >
             Ok
           </button>

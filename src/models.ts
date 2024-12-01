@@ -5,7 +5,7 @@ import {z} from "zod";
 //     temperature: number;
 //     saturation?: number;
 //     symptoms?: string;
-//     respiratoryRate?: number;
+//     respiratoryFrequency?: number;
 //     comment?: string;
 //   };
 
@@ -15,7 +15,7 @@ export const TemperatureSchema = z.object({
   timestamp: z.date(),
   saturation: z.coerce.number().min(0).max(100).step(1).optional(),
   symptoms: z.string().optional(),
-  respiratoryRate: z.coerce.number().optional(),
+  respiratoryFrequency: z.coerce.number().optional(),
   comment: z.string().optional(),
 });
 

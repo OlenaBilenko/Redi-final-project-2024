@@ -8,10 +8,13 @@ import { InhalationList } from "../../components/inhalation-list/inhalation-list
 import { BodyTempList } from "../../components/body-temp-list/body-temp-list";
 import { useState } from "react";
 import { Temperature } from "@/models";
+import { BodyWeigthHeight } from "@/components/body-weigth-height/body-weigth-height";
+import { Medication } from "@/components/medication/medication";
 
 function App() {
   const [tempModal, setTempModal] = useState(false);
   const [weigthHeigthModal, setWeigthHeigthModal] = useState(false);
+  const [medicationModal, setMedicationModal] = useState(false);
   const [data, setData] = useState<Temperature>();
 
   // const toggleTempModal = (id?: number, data?: Temperature) => {
@@ -35,19 +38,18 @@ function App() {
   ////////////////////////////
   const openWeigthHeigthModal = () => {
     setWeigthHeigthModal(true);
-    setData(data);
   };
   const closeWeigthHeigthModal = () => {
     setWeigthHeigthModal(false);
   };
   ////////////////////////////
-  // const openMedicationModal = (id?: number, data?: Temperature) => {
-  //   setTempModal(true);
-  //   setData(data);
-  // };
-  // const closeMedicationModal = () => {
-  //   setTempModal(false);
-  // };
+  const openMedicationModal = () => {
+    setTempModal(true);
+    setData(data);
+  };
+  const closeMedicationModal = () => {
+    setTempModal(false);
+  };
   return (
     <>
       <div className="flex gap-4 flex-col p-4">
@@ -56,13 +58,19 @@ function App() {
         <Button onClick={() => openWeigthHeigthModal()}>
           Log weigth/heigth
         </Button>
-        {/* <Button onClick={() => openMedicationModal()}>Log medication</Button> */}
+        <Button onClick={() => openMedicationModal()}>Log medication</Button>
         {/* <Chart /> */}
         <div className="flex flex-row justify-evenly gap-3 bg-slate-100">
           <FirstLineChart />
           <FirstLineChart />
         </div>
         {tempModal && <BodyTemp data={data} closeTempModal={closeTempModal} />}
+        {weigthHeigthModal && (
+          <BodyWeigthHeight closeWeigthHeigthModal={closeWeigthHeigthModal} />
+        )}
+        {medicationModal && (
+          <Medication closeMedicationModal={closeMedicationModal} />
+        )}
         <div className="hydration-and-planing">
           <InhalationList />
           <BodyTempList

@@ -31,7 +31,7 @@ export const BodyTemp = (props: Props) => {
       //   timestamp: new Date().toISOString(),
       //   // saturation: 98,
       //   // symptoms: "none",
-      //   // respiratoryRate: 65,
+      //   // respiratoryFrequency: 65,
       //   // comment: "none",
       // };
 
@@ -61,7 +61,9 @@ export const BodyTemp = (props: Props) => {
 
   const dialog = useRef<HTMLDialogElement>();
   useLayoutEffect(() => {
-    dialog.current.showModal();
+    if (dialog.current) {
+      dialog.current.showModal();
+    }
   }, [dialog]);
 
   return (
@@ -119,11 +121,11 @@ export const BodyTemp = (props: Props) => {
               type="number"
               inputMode="numeric"
               placeholder="Respiratory frequency"
-              {...form.register("respiratoryRate")}
+              {...form.register("respiratoryFrequency")}
             />
-            {errors.respiratoryRate && (
+            {errors.respiratoryFrequency && (
               <p className="dialog-box-title">
-                {errors.respiratoryRate?.message}
+                {errors.respiratoryFrequency?.message}
               </p>
             )}
             <div className="tempComment">

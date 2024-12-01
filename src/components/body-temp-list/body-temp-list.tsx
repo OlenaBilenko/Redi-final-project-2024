@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Temperature } from "@/models";
+import { Link } from "react-router";
 
 type Props = {
   openTempModal: (id: number, data: any) => void;
@@ -42,6 +43,7 @@ export const BodyTempList = (props: Props) => {
             <tr>
               <th style={{ width: "50%" }}>Time</th>
               <th style={{ width: "50%" }}>Temperature </th>
+              <th style={{ width: "50%" }}>Info </th>
             </tr>
           </thead>
           <tbody>
@@ -56,6 +58,9 @@ export const BodyTempList = (props: Props) => {
                 >
                   <td>{date}</td>
                   <td>{t.temperature}</td>
+                  <td>
+                    <Link to={`/temperature/${t.id}`}>i</Link>
+                  </td>
                 </tr>
               );
             })}

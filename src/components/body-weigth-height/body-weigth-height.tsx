@@ -1,12 +1,26 @@
+import { useLayoutEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 type Props = {
   closeWeigthHeigthModal: () => void;
 };
 
-export const BodyWeigthHeight = () => {
+export const BodyWeigthHeight = (props: Props) => {
+  const submitWeigthHeight = async (data: any) => {
+    console.log("Data", data);
+  };
+
+  const dialog = useRef<HTMLDialogElement>();
+  useLayoutEffect(() => {
+    if (dialog.current) {
+      dialog.current.showModal();
+    }
+  }, [dialog]);
+
+  const form = useForm({});
+
   return (
-    <dialog id="bodyWeigthHeightModal" className="dialog-modal" open={true}>
+    <dialog id="bodyWeigthHeightModal" className="dialog-modal" ref={dialog}>
       <div className="dialog-box-modal">
         <div className="dialog-box-title">
           <h1>Body Weigth / Height</h1>
@@ -55,7 +69,7 @@ export const BodyWeigthHeight = () => {
             id="submitWeigthHeightButton"
             className="submitButton"
             type="submit"
-            onClick={form.handleSubmit(submitWeigthHeigth)}
+            onClick={form.handleSubmit(submitWeigthHeight)}
           >
             Ok
           </button>
