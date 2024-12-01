@@ -2,7 +2,15 @@ import { useState } from "react";
 import { DialogCreateLog } from "../dialog-create-log/dialog-create-log";
 import "./log-modal-button.css";
 
-export const AddLogModalButton = () => {
+type Props = {
+  setDialogOpen: (v: boolean) => void;
+  openTempModal: () => void;
+  closeModal: () => void;
+  openWeigthHeigthModal: () => void;
+  openMedicationModal: () => void;
+};
+
+export const AddLogModalButton = (props: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   return (
     <>
@@ -17,7 +25,15 @@ export const AddLogModalButton = () => {
           +
         </button>
       </div>
-      {dialogOpen && <DialogCreateLog setDialogOpen={setDialogOpen} />}
+      {dialogOpen && (
+        <DialogCreateLog
+          setDialogOpen={setDialogOpen}
+          openTempModal={props.openTempModal}
+          closeModal={props.closeModal}
+          openWeigthHeigthModal={props.openWeigthHeigthModal}
+          openMedicationModal={props.openMedicationModal}
+        />
+      )}
     </>
   );
 };

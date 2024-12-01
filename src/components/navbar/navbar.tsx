@@ -53,24 +53,24 @@ export const NavBar = () => {
         </li>
         <li>
           <Link className="nav-list-link" to="/body-weight">
-            Body weight
+            Body weight/height
           </Link>
         </li>
-        <li>
+        {/* <li>
           <a className="nav-list-link" href="#">
             Hydration
           </a>
-        </li>
+        </li> */}
         <li>
           <a className="nav-list-link" href="#">
             Daily planing
           </a>
         </li>
-        <li>
+        {/* <li>
           <a className="nav-list-link" href="#">
             Table box
           </a>
-        </li>
+        </li> */}
         <li>
           <a className="nav-list-link" href="#">
             Info posts

@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { Bar, BarChart } from "recharts";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { FirstLineChart } from "../../components/temp-chart/temp-chart";
@@ -8,76 +8,93 @@ import { InhalationList } from "../../components/inhalation-list/inhalation-list
 import { BodyTempList } from "../../components/body-temp-list/body-temp-list";
 import { useState } from "react";
 import { Temperature } from "@/models";
-import { BodyWeigthHeight } from "@/components/body-weigth-height/body-weigth-height";
+import { BodyWeigthHeight } from "@/components/body-weight-height/body-weight-height";
 import { Medication } from "@/components/medication/medication";
+import { AddLogModalButton } from "@/components/log-modal-button/log-modal-button";
 
-function App() {
+function useModalManager() {
   const [tempModal, setTempModal] = useState(false);
   const [weigthHeigthModal, setWeigthHeigthModal] = useState(false);
   const [medicationModal, setMedicationModal] = useState(false);
   const [data, setData] = useState<Temperature>();
 
-  // const toggleTempModal = (id?: number, data?: Temperature) => {
-  //   setTempModal(!tempModal);
-  // };
-  // const openLogModal = (id?: number, data?: Temperature) => {
-  //   setTempModal(true);
-  //   setData(data);
-  // };
-  // const closeLogModal = () => {
-  //   setTempModal(false);
-  // };
+  //////////////
+  const closeModal = () => {
+    setTempModal(false);
+    setWeigthHeigthModal(false);
+    setMedicationModal(false);
+  };
   ////////////////////////////
   const openTempModal = (id?: number, data?: Temperature) => {
     setTempModal(true);
     setData(data);
   };
-  const closeTempModal = () => {
-    setTempModal(false);
-  };
   ////////////////////////////
   const openWeigthHeigthModal = () => {
     setWeigthHeigthModal(true);
-  };
-  const closeWeigthHeigthModal = () => {
-    setWeigthHeigthModal(false);
   };
   ////////////////////////////
   const openMedicationModal = () => {
     setMedicationModal(true);
     setData(data);
   };
-  const closeMedicationModal = () => {
-    setMedicationModal(false);
+  ////////////////////////////
+  return {
+    data,
+    tempModal,
+    openTempModal,
+    closeModal,
+    weigthHeigthModal,
+    openWeigthHeigthModal,
+    medicationModal,
+    openMedicationModal,
   };
+}
+
+function App() {
+  const {
+    data,
+    tempModal,
+    openTempModal,
+    closeModal,
+    weigthHeigthModal,
+    openWeigthHeigthModal,
+    medicationModal,
+    openMedicationModal,
+  } = useModalManager();
+
   return (
     <>
       <div className="flex gap-4 flex-col p-4">
         {/* <Button onClick={() => openLogModal()}>Create Log</Button> */}
-        <Button onClick={() => openTempModal()}>Log temperature</Button>
+        {/* <Button onClick={() => openTempModal()}>Log temperature</Button>
         <Button onClick={() => openWeigthHeigthModal()}>
           Log weigth/height
         </Button>
-        <Button onClick={() => openMedicationModal()}>Log medication</Button>
+        <Button onClick={() => openMedicationModal()}>Log medication</Button> */}
 
         <FirstLineChart />
 
-        {tempModal && <BodyTemp data={data} closeTempModal={closeTempModal} />}
+        {tempModal && <BodyTemp data={data} closeTempModal={closeModal} />}
         {weigthHeigthModal && (
-          <BodyWeigthHeight closeWeigthHeigthModal={closeWeigthHeigthModal} />
+          <BodyWeigthHeight closeWeigthHeigthModal={closeModal} />
         )}
-        {medicationModal && (
-          <Medication closeMedicationModal={closeMedicationModal} />
-        )}
+        {medicationModal && <Medication closeMedicationModal={closeModal} />}
 
         <div className="hydration-and-planing">
           <InhalationList />
           <BodyTempList
             openTempModal={openTempModal}
-            closeTempModal={closeTempModal}
+            closeTempModal={closeModal}
           />
         </div>
       </div>
+      <AddLogModalButton
+        openTempModal={openTempModal}
+        closeModal={closeModal}
+        openWeigthHeigthModal={openWeigthHeigthModal}
+        openMedicationModal={openMedicationModal}
+      />
     </>
   );
 }

@@ -63,7 +63,7 @@ export function FirstLineChart() {
                 const formatter = new Intl.DateTimeFormat("en-US", {
                   hour: "numeric",
                   minute: "numeric",
-                  second: "numeric",
+                  // second: "numeric",
 
                   hour12: false, // Use `false` for 24-hour time
                 });
@@ -79,8 +79,8 @@ export function FirstLineChart() {
             <Line
               dataKey="value"
               type="monotone"
-              stroke="red"
-              strokeWidth={2}
+              stroke="coral"
+              strokeWidth={3}
               dot={false}
             />
           </LineChart>
@@ -90,7 +90,7 @@ export function FirstLineChart() {
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-medium leading-none">
-              Body temperature over time <TrendingUp className="h-4 w-4" />
+              Body temperature <TrendingUp className="h-4 w-4" />
             </div>
           </div>
         </div>

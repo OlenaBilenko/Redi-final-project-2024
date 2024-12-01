@@ -42,12 +42,24 @@ export const BodyTempList = (props: Props) => {
           <thead>
             <tr>
               <th style={{ width: "50%" }}>Time</th>
-              <th style={{ width: "50%" }}>Temperature </th>
-              <th style={{ width: "50%" }}>Info </th>
+              <th style={{ width: "40%" }}>Temperature, °C</th>
+              <th style={{ width: "10%" }}>Info </th>
             </tr>
           </thead>
           <tbody>
-            {data.map((t) => {
+            {data
+              //.reverse()
+              .slice(-8)
+              .map((temp) => (
+                <tr key={temp.id}>
+                  <td>{new Date(temp.timestamp).toLocaleString()}</td>
+                  <td>{temp.temperature} °C</td>
+                  <td>
+                    <Link to={`/temperature/${temp.id}`}>i</Link>
+                  </td>
+                </tr>
+              ))}
+            {/* {data.map((t) => {
               const date = new Date(t.timestamp).toLocaleString();
               return (
                 <tr
@@ -63,7 +75,7 @@ export const BodyTempList = (props: Props) => {
                   </td>
                 </tr>
               );
-            })}
+            })} */}
           </tbody>
         </table>
       </div>
