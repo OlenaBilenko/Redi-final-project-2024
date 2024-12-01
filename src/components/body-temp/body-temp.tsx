@@ -70,7 +70,9 @@ export const BodyTemp = (props: Props) => {
     <dialog id="bodyTempModal" className="dialog-modal" ref={dialog}>
       <div className="dialog-box-modal">
         <div className="dialog-box-title">
-          <h1>Body Temperature</h1>
+          <h1 className="font-semibold leading-none tracking-tight">
+            Body Temperature
+          </h1>
         </div>
         <form onSubmit={form.handleSubmit(submitTemp)}>
           <div

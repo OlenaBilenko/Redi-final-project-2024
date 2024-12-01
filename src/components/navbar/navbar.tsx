@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import "./navbar.css";
 import { useState } from "react";
 
@@ -14,6 +14,10 @@ export const NavBar = () => {
   const navMenuListClass = epandedToggle
     ? "nav-list"
     : "nav-list hide-on-narrow-screen";
+
+  const location = useLocation();
+  console.log(location.pathname);
+
   return (
     <nav id="navMenu" className="nav">
       <button
@@ -42,17 +46,32 @@ export const NavBar = () => {
       </button>
       <ul id="navMenuList" className={navMenuListClass}>
         <li>
-          <Link className="nav-list-link" to="/">
+          <Link
+            className={`nav-list-link ${
+              location.pathname === "/" ? "active" : ""
+            }`}
+            to="/"
+          >
             Home
           </Link>
         </li>
         <li>
-          <Link className="nav-list-link" to="/body-temp">
+          <Link
+            className={`nav-list-link ${
+              location.pathname === "/body-temp" ? "active" : ""
+            }`}
+            to="/body-temp"
+          >
             Body temperature
           </Link>
         </li>
         <li>
-          <Link className="nav-list-link" to="/body-weight">
+          <Link
+            className={`nav-list-link ${
+              location.pathname === "/body-weight" ? "active" : ""
+            }`}
+            to="/body-weight"
+          >
             Body weight/height
           </Link>
         </li>
@@ -62,22 +81,32 @@ export const NavBar = () => {
           </a>
         </li> */}
         <li>
-          <a className="nav-list-link" href="#">
+          <Link
+            className={`nav-list-link ${
+              location.pathname === "/inhalation" ? "active" : ""
+            }`}
+            to="/inhalation"
+          >
             Daily planing
-          </a>
+          </Link>
         </li>
         {/* <li>
           <a className="nav-list-link" href="#">
             Table box
           </a>
         </li> */}
-        <li>
+        {/* <li>
           <a className="nav-list-link" href="#">
             Info posts
           </a>
-        </li>
+        </li> */}
         <li>
-          <Link className="nav-list-link" to="/about">
+          <Link
+            className={`nav-list-link ${
+              location.pathname === "/about" ? "active" : ""
+            }`}
+            to="/about"
+          >
             Contact
           </Link>
         </li>

@@ -3,18 +3,13 @@
 import { useEffect, useState } from "react";
 import { Temperature } from "@/models";
 import { Link } from "react-router";
+import { fetchTemperature } from "./api";
 
 type Props = {
   openTempModal: (id: number, data: any) => void;
   closeTempModal: (id: number, data: any) => void;
 };
 
-const fetchTemperature = async () => {
-  const result = await fetch("http://localhost:3000/temperatures");
-  const data = await result.json();
-  console.log({ data });
-  return data as Temperature[];
-};
 export const BodyTempList = (props: Props) => {
   const [data, setData] = useState<Temperature[]>([]);
 
@@ -35,8 +30,10 @@ export const BodyTempList = (props: Props) => {
   };
 
   return (
-    <div className="daily-planing">
-      <h4>Temperature List</h4>
+    <div className="flex w-full flex-col sm:w-1/2">
+      <h4 className="font-semibold leading-none tracking-tight">
+        Temperature List
+      </h4>
       <div className="daily-table">
         <table className="table">
           <thead>
@@ -51,7 +48,12 @@ export const BodyTempList = (props: Props) => {
               //.reverse()
               .slice(-8)
               .map((temp) => (
-                <tr key={temp.id}>
+                <tr
+                  key={temp.id}
+                  onClick={() => {
+                    handleRowClick(temp);
+                  }}
+                >
                   <td>{new Date(temp.timestamp).toLocaleString()}</td>
                   <td>{temp.temperature} °C</td>
                   <td>

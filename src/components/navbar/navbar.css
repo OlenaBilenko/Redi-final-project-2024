@@ -81,3 +81,6 @@ a {
   font-size: 2rem;
   cursor: pointer;
 }
+.active {
+  color: coral;
+}

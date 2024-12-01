@@ -1,5 +1,9 @@
-import { BodyTempList } from "@/components/body-temp-list/body-temp-list";
+import { BodyTempListFull } from "@/components/body-temp-list/body-temp-list-full";
 
 export const BodyTempPage: React.FC = () => {
-  return <BodyTempList openTempModal={() => {}} closeTempModal={() => {}} />;
+  return (
+    <div className="p-4">
+      <BodyTempListFull />
+    </div>
+  );
 };
