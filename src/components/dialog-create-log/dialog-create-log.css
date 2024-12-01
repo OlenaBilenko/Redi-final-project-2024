@@ -1,0 +1,154 @@
+@media screen and (max-width: 838px) {
+  .dialog-add-log {
+    max-width: 100vw;
+  }
+  .dialog-box {
+    max-width: 100%;
+    max-height: calc(100vw - 100px);
+  }
+
+  .dialog-box-content-temp,
+  .dialog-box-content-weigth-heigth,
+  .dialog-box-content-medication {
+    border-radius: 2rem;
+    margin: 0.8rem;
+  }
+  .dialog-box-title h1 {
+    font-size: 1.5rem;
+  }
+  input {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 839px) {
+  .dialog-box-content-temp,
+  .dialog-box-content-weigth-heigth,
+  .dialog-box-content-medication {
+    border-radius: 3rem;
+    margin: 1rem;
+  }
+}
+.nav-toggle {
+  color: #fff;
+  background-color: #484282;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+.burger-icon {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  vertical-align: -0.125em;
+}
+.dialog-add-log {
+  z-index: 2;
+  background: white;
+  color: black;
+  border: 1px solid #050038;
+  padding: 0px;
+}
+.dialog-box {
+  width: 800px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+}
+.dialog-box-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #050038;
+  color: white;
+}
+.dialog-box-title button {
+  margin-right: 0.5em;
+  background-color: #050038;
+  color: white;
+  font-size: x-large;
+  border-style: none;
+  cursor: pointer;
+  border: solid 1px #050038;
+}
+.dialog-box-title button:hover {
+  border: solid 1px white;
+  transition: all 0.5s ease;
+}
+.dialog-box-title h1 {
+  margin-left: 1em;
+}
+.dialog-box-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: lightgray;
+}
+.dialog-box-content-temp,
+.dialog-box-content-weigth-heigth,
+.dialog-box-content-medication {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: 80%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.dialog-box-content-temp img,
+.dialog-box-content-weigth-heigth img,
+.dialog-box-content-medication img {
+  width: 70%;
+  height: auto;
+}
+.dialog-box-content-temp h4,
+.dialog-box-content-weigth-heigth h4,
+.dialog-box-content-medication h4 {
+  height: 34px;
+  text-align: center;
+  align-content: center;
+}
+.dialog-box-content-temp,
+.dialog-box-content-weigth-heigth,
+.dialog-box-content-medication {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.dialog-box-content-temp {
+  border: 2px solid yellow;
+}
+.dialog-box-content-temp:hover {
+  box-shadow: 0px 0px 15px yellow;
+}
+.dialog-box-content-weigth-heigth {
+  border: 2px solid greenyellow;
+}
+.dialog-box-content-weigth-heigth:hover {
+  box-shadow: 0px 0px 15px greenyellow;
+}
+.dialog-box-content-medication {
+  border: 2px solid lightskyblue;
+}
+.dialog-box-content-medication:hover {
+  box-shadow: 0px 0px 15px lightskyblue;
+}
+.dialog-box-footer {
+  width: 100%;
+  height: 60px;
+  background-color: #050038;
+}
+.dialog-add-log::backdrop {
+  background-color: hsla(240, 1%, 25%, 0.95);
+}
+.dialog-modal::backdrop {
+  background-color: hsla(240, 1%, 25%, 0.95);
+}

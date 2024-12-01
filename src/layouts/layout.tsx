@@ -1,3 +1,4 @@
+import { AddLogModalButton } from "@/components/log-modal-button/log-modal-button";
 import { NavBar } from "@/components/navbar/navbar";
 import React from "react";
 import { Outlet } from "react-router";
@@ -9,6 +10,7 @@ export const Layout: React.FC = ({ children }) => {
         <header className="header">
           <h1>My healthy Life</h1>
         </header>
+        <AddLogModalButton />
         <NavBar />
         <Outlet />
       </div>

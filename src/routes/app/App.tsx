@@ -44,11 +44,11 @@ function App() {
   };
   ////////////////////////////
   const openMedicationModal = () => {
-    setTempModal(true);
+    setMedicationModal(true);
     setData(data);
   };
   const closeMedicationModal = () => {
-    setTempModal(false);
+    setMedicationModal(false);
   };
   return (
     <>
@@ -59,7 +59,6 @@ function App() {
           Log weigth/heigth
         </Button>
         <Button onClick={() => openMedicationModal()}>Log medication</Button>
-        {/* <Chart /> */}
         <div className="flex flex-row justify-evenly gap-3 bg-slate-100">
           <FirstLineChart />
           <FirstLineChart />
@@ -71,6 +70,7 @@ function App() {
         {medicationModal && (
           <Medication closeMedicationModal={closeMedicationModal} />
         )}
+
         <div className="hydration-and-planing">
           <InhalationList />
           <BodyTempList
