@@ -10,7 +10,7 @@ const fetchTemperature = async (id: number) => {
 
 export const ViewTemperature = () => {
   const params = useParams();
-  const [data, setData] = useState<Temperature[]>([]);
+  const [data, setData] = useState<Temperature>();
 
   useEffect(() => {
     fetchTemperature(params.id)
@@ -23,5 +23,47 @@ export const ViewTemperature = () => {
       });
   }, []);
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  return (
+    <div style={{ maxWidth: 400 }} className="flex flex-col gap-4 p-4">
+      <div className="flex flex-row justify-between">
+        <div className="font-medium">Temperature:</div>
+        <div>{data.temperature}</div>
+      </div>
+      <div className="flex flex-row justify-between">
+        <div>Date:</div>
+        <div>
+          {new Date(data.timestamp).toLocaleTimeString() +
+            " " +
+            new Date(data.timestamp).toLocaleDateString()}
+        </div>
+      </div>
+      {data.symptoms && (
+        <div className="flex flex-row justify-between">
+          <div className="font-medium">Symptoms:</div>
+          <div>{data.symptoms}</div>
+        </div>
+      )}
+      {data.respiratoryFrequency && (
+        <div className="flex flex-row justify-between">
+          <div className="font-medium">Respiratory Frequency:</div>
+          <div>{data.respiratoryFrequency}</div>
+        </div>
+      )}
+      {data.saturation && (
+        <div className="flex flex-row justify-between">
+          <div className="font-medium">Saturation:</div>
+          <div>{data.saturation}</div>
+        </div>
+      )}
+      {data.comment && (
+        <div className="flex flex-row justify-between">
+          <div className="font-medium">Comment:</div>
+          <div>{data.comment}</div>
+        </div>
+      )}
+    </div>
+  );
 };
