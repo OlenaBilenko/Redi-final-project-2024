@@ -44,40 +44,20 @@ export const BodyTempList = (props: Props) => {
             </tr>
           </thead>
           <tbody>
-            {data
-              //.reverse()
-              .slice(-8)
-              .map((temp) => (
-                <tr
-                  key={temp.id}
-                  onClick={() => {
-                    handleRowClick(temp);
-                  }}
-                >
-                  <td>{new Date(temp.timestamp).toLocaleString()}</td>
-                  <td>{temp.temperature} °C</td>
-                  <td>
-                    <Link to={`/temperature/${temp.id}`}>i</Link>
-                  </td>
-                </tr>
-              ))}
-            {/* {data.map((t) => {
-              const date = new Date(t.timestamp).toLocaleString();
-              return (
-                <tr
-                  key={t.id}
-                  onClick={() => {
-                    handleRowClick(t);
-                  }}
-                >
-                  <td>{date}</td>
-                  <td>{t.temperature}</td>
-                  <td>
-                    <Link to={`/temperature/${t.id}`}>i</Link>
-                  </td>
-                </tr>
-              );
-            })} */}
+            {data.slice(-8).map((temp) => (
+              <tr
+                key={temp.id}
+                onClick={() => {
+                  handleRowClick(temp);
+                }}
+              >
+                <td>{new Date(temp.timestamp).toLocaleString()}</td>
+                <td>{temp.temperature} °C</td>
+                <td>
+                  <Link to={`/temperature/${temp.id}`}>i</Link>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

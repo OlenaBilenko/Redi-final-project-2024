@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-import "./medication.css";
 
 type Props = {
   closeMedicationModal: () => void;

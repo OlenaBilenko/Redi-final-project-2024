@@ -1,5 +1,3 @@
-import "./App.css";
-// import { Button } from "@/components/ui/button";
 import { Bar, BarChart } from "recharts";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { FirstLineChart } from "../../components/temp-chart/temp-chart";

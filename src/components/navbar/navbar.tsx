@@ -2,13 +2,6 @@ import { Link, useLocation } from "react-router";
 import "./navbar.css";
 import { useState } from "react";
 
-// const toggleButton = document.getElementById("navToggle");
-// const navListMenu = document.getElementById("navMenuList");
-
-// toggleButton.addEventListener("click", () => {
-//   navListMenu.classList.toggle("hide-on-narrow-screen");
-// });
-
 export const NavBar = () => {
   const [epandedToggle, setExpandedToggle] = useState(false);
   const navMenuListClass = epandedToggle
@@ -74,11 +67,6 @@ export const NavBar = () => {
             Body weight/height
           </Link>
         </li>
-        {/* <li>
-          <a className="nav-list-link" href="#">
-            Hydration
-          </a>
-        </li> */}
         <li>
           <Link
             className={`nav-list-link ${
@@ -89,16 +77,6 @@ export const NavBar = () => {
             Daily planing
           </Link>
         </li>
-        {/* <li>
-          <a className="nav-list-link" href="#">
-            Table box
-          </a>
-        </li> */}
-        {/* <li>
-          <a className="nav-list-link" href="#">
-            Info posts
-          </a>
-        </li> */}
         <li>
           <Link
             className={`nav-list-link ${

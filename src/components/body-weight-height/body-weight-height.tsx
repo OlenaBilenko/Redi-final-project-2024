@@ -8,6 +8,7 @@ type Props = {
 export const BodyWeigthHeight = (props: Props) => {
   const submitWeigthHeight = async (data: any) => {
     console.log("Data", data);
+    props.closeWeigthHeigthModal();
   };
 
   const dialog = useRef<HTMLDialogElement>();
@@ -30,6 +31,12 @@ export const BodyWeigthHeight = (props: Props) => {
             <input
               id="tempTime"
               type="datetime-local"
+              inputMode="numeric"
+              required
+            />
+            <input
+              id="weightValue"
+              type="number"
               inputMode="numeric"
               placeholder="Weight (kg)"
               required
