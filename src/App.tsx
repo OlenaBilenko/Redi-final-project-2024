@@ -12,11 +12,20 @@ import { Temperature } from "@/models";
 
 function App() {
   const [tempModal, setTempModal] = useState(false);
+  const [weigthHeigthModal, setWeigthHeigthModal] = useState(false);
   const [data, setData] = useState<Temperature>();
 
   // const toggleTempModal = (id?: number, data?: Temperature) => {
   //   setTempModal(!tempModal);
   // };
+  // const openLogModal = (id?: number, data?: Temperature) => {
+  //   setTempModal(true);
+  //   setData(data);
+  // };
+  // const closeLogModal = () => {
+  //   setTempModal(false);
+  // };
+  ////////////////////////////
   const openTempModal = (id?: number, data?: Temperature) => {
     setTempModal(true);
     setData(data);
@@ -24,12 +33,33 @@ function App() {
   const closeTempModal = () => {
     setTempModal(false);
   };
+  ////////////////////////////
+  const openWeigthHeigthModal = () => {
+    setWeigthHeigthModal(true);
+    setData(data);
+  };
+  const closeWeigthHeigthModal = () => {
+    setWeigthHeigthModal(false);
+  };
+  ////////////////////////////
+  // const openMedicationModal = (id?: number, data?: Temperature) => {
+  //   setTempModal(true);
+  //   setData(data);
+  // };
+  // const closeMedicationModal = () => {
+  //   setTempModal(false);
+  // };
   return (
     <>
       <NavBar />
       <div className="flex gap-4 flex-col p-4">
         <h1 className="text-3xl font-bold underline">My healthy Life</h1>
+        {/* <Button onClick={() => openLogModal()}>Create Log</Button> */}
         <Button onClick={() => openTempModal()}>Log temperature</Button>
+        <Button onClick={() => openWeigthHeigthModal()}>
+          Log weigth/heigth
+        </Button>
+        {/* <Button onClick={() => openMedicationModal()}>Log medication</Button> */}
         {/* <Chart /> */}
         <div className="flex flex-row justify-evenly gap-3 bg-slate-100">
           <FirstLineChart />
