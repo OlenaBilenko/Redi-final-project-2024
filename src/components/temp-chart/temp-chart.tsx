@@ -1,5 +1,5 @@
 import { TrendingUp } from "lucide-react";
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -15,35 +15,36 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
+import { tempChartData } from "./data";
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  temperature: {
+    label: "Temperature",
     color: "hsl(var(--chart-1))",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
 export function FirstLineChart() {
+  const chartData = Object.entries(tempChartData)
+    .filter((item) => item[1] != null)
+    .map((item) => {
+      const key = item[0];
+      const value = item[1];
+      return { month: key, value };
+    });
+  const minValue = 30;
+  console.log({ chartData });
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Line Chart</CardTitle>
+        <CardTitle>Body temperature records</CardTitle>
         <CardDescription>Chart Header Discription</CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer
+          config={chartConfig}
+          style={{ height: 300, width: "100%" }}
+        >
           <LineChart
             accessibilityLayer
             data={chartData}
@@ -58,20 +59,27 @@ export function FirstLineChart() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => {
+                const formatter = new Intl.DateTimeFormat("en-US", {
+                  hour: "numeric",
+                  minute: "numeric",
+                  second: "numeric",
+
+                  hour12: false, // Use `false` for 24-hour time
+                });
+
+                return formatter.format(new Date(value));
+              }}
+            />
+            <YAxis
+              domain={[minValue, "dataMax"]}
+              tickFormatter={(value) => Math.round(value)}
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line
-              dataKey="desktop"
+              dataKey="value"
               type="monotone"
-              stroke="var(--color-desktop)"
-              strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              dataKey="mobile"
-              type="monotone"
-              stroke="var(--color-mobile)"
+              stroke="red"
               strokeWidth={2}
               dot={false}
             />
@@ -82,10 +90,7 @@ export function FirstLineChart() {
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-medium leading-none">
-              Chart Footer <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              Chart Footer Description
+              Body temperature over time <TrendingUp className="h-4 w-4" />
             </div>
           </div>
         </div>

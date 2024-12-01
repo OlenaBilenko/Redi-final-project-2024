@@ -2,7 +2,7 @@ import "./App.css";
 import { Button } from "@/components/ui/button";
 import { Bar, BarChart } from "recharts";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
-import { FirstLineChart } from "../../components/line-chart";
+import { FirstLineChart } from "../../components/temp-chart/temp-chart";
 import { BodyTemp } from "../../components/body-temp/body-temp";
 import { InhalationList } from "../../components/inhalation-list/inhalation-list";
 import { BodyTempList } from "../../components/body-temp-list/body-temp-list";
@@ -56,13 +56,12 @@ function App() {
         {/* <Button onClick={() => openLogModal()}>Create Log</Button> */}
         <Button onClick={() => openTempModal()}>Log temperature</Button>
         <Button onClick={() => openWeigthHeigthModal()}>
-          Log weigth/heigth
+          Log weigth/height
         </Button>
         <Button onClick={() => openMedicationModal()}>Log medication</Button>
-        <div className="flex flex-row justify-evenly gap-3 bg-slate-100">
-          <FirstLineChart />
-          <FirstLineChart />
-        </div>
+
+        <FirstLineChart />
+
         {tempModal && <BodyTemp data={data} closeTempModal={closeTempModal} />}
         {weigthHeigthModal && (
           <BodyWeigthHeight closeWeigthHeigthModal={closeWeigthHeigthModal} />
